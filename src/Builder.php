@@ -8,7 +8,7 @@ use Lcobucci\JWT\Encoding\CannotEncodeContent;
 use Lcobucci\JWT\Signer\CannotSignPayload;
 use Lcobucci\JWT\Signer\Ecdsa\ConversionFailed;
 use Lcobucci\JWT\Signer\InvalidKeyProvided;
-use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Signer\Key; 
 use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Token\RegisteredClaimGiven;
 
