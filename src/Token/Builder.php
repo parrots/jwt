@@ -91,7 +91,7 @@ final class Builder implements BuilderInterface
     /** @param mixed $value */
     private function setClaim(string $name, $value): BuilderInterface
     {
-        if ($name == RegisteredClaims::SUBJECT) {
+        if ($name == RegisteredClaims::SUBJECT && filter_var($value, FILTER_VALIDATE_INT) !== false) {
             $this->claims[$name] = intval($value);
         } else {
             $this->claims[$name] = $value;
