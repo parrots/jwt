@@ -39,10 +39,9 @@ use const PHP_EOL;
  * @covers \Lcobucci\JWT\Signer\OpenSSL
  * @covers \Lcobucci\JWT\SodiumBase64Polyfill
  * @covers \Lcobucci\JWT\Validation\Validator
+ * @covers \Lcobucci\JWT\Validation\ConstraintViolation
  * @covers \Lcobucci\JWT\Validation\Constraint\SignedWith
- * @covers \Lcobucci\JWT\Validation\Validator
  * @covers \Lcobucci\JWT\Validation\RequiredConstraintsViolated
- * @covers \Lcobucci\JWT\Validation\Constraint\SignedWith
  */
 class EcdsaTokenTest extends TestCase
 {
@@ -81,7 +80,7 @@ class EcdsaTokenTest extends TestCase
         $builder = $this->config->builder();
 
         $this->expectException(InvalidKeyProvided::class);
-        $this->expectExceptionMessage('This key is not compatible with this signer');
+        $this->expectExceptionMessage('The type of the provided key is not "EC", "RSA" provided');
 
         $builder->identifiedBy('1')
                 ->permittedFor('http://client.abc.com')
@@ -172,7 +171,7 @@ class EcdsaTokenTest extends TestCase
     public function signatureAssertionShouldRaiseExceptionWhenKeyIsNotEcdsaCompatible(Token $token): void
     {
         $this->expectException(InvalidKeyProvided::class);
-        $this->expectExceptionMessage('This key is not compatible with this signer');
+        $this->expectExceptionMessage('The type of the provided key is not "EC", "RSA" provided');
 
         $this->config->validator()->assert(
             $token,
